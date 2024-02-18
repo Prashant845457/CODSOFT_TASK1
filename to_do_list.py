@@ -1,48 +1,89 @@
-class TodoList:
-    def _init_(self):
-        self.tasks = []
+import time
+Tasks=[]
+ok=1
 
-    def add_task(self, task):
-        self.tasks.append(task)
-        print(f'Task "{task}" added to the to-do list.')
 
-    def remove_task(self, task):
-        if task in self.tasks:
-            self.tasks.remove(task)
-            print(f'Task "{task}" removed from the to-do list.')
-        else:
-            print(f'Task "{task}" not found in the to-do list.')
 
-    def show_tasks(self):
-        if not self.tasks:
-            print("No tasks in the to-do list.")
-        else:
-            print("To-Do List:")
-            for i, task in enumerate(self.tasks, start=1):
-                print(f'{i}. {task}')
+def Add():
+    SNO=len(Tasks)
+    Title=input("Enter Title: ")
+    Description=input("Description: ")
+    Deadline=input("Deadline/Time: ")
+    Status="Uncompleted"
+    Task=[SNO, Title, Description, Deadline, Status]
+    Tasks.append(Task)
+    line("*")
+    print("Task Added")
+    line("*")
 
-# Example usage
-todo_list = TodoList()
+def View():
+    line("=")
+    print("S.No.    Title    Description    Deadline    Status")
+    for i in Tasks:
+        line("-")
+        for j in i:
+            print(j, end="      ")
+        line("-")
+        # print("\n")
+def Remove():
+    a=int(input("Enter Task number to delete: "))
+    Tasks.remove(Tasks[a])
+    line("~")
+    print("Task Removed")
+    line("~")
+def Mark():
+    b=int(input("Enter Task number to mark completed: "))
+    Tasks[b][4]="Completed"
+    line("*")
+    print("Marked Successfully")
+    line("*")
 
-while True:
-    print("\nMenu:")
-    print("1. Add Task")
-    print("2. Remove Task")
-    print("3. Show Tasks")
-    print("4. Exit")
+def line(sign, k=60):
+    print("\n")
+    for i in range(k):
+        print(sign, end="")
+    print("\n")
+def center():
+    for k in range(50):
+        print(" ", end="")
 
-    choice = input("Enter your choice (1-4): ")
+def load():
+    word="LOADING...!!"
+    for i in word:
+        print(i, end=" ")
+        time.sleep(0.3)
 
-    if choice == '1':
-        task = input("Enter the task: ")
-        todo_list.add_task(task)
-    elif choice == '2':
-        task = input("Enter the task to remove: ")
-        todo_list.remove_task(task)
-    elif choice == '3':
-        todo_list.show_tasks()
-    elif choice == '4':
-        print("Exiting the program. Goodbye!")
+
+
+
+
+
+
+
+
+
+load()
+line("\"", 100)
+center()
+print("To-Do Maker")
+line("\"", 100)
+while ok!=0:
+    print("(1)Add Task")
+    print("(2)View Tasks")
+    print("(3)Remove Task")
+    print("(4)Mark As Completed")
+    print("(5)Quit")
+    choice=int(input("**Enter Action: "))
+    print("\n")
+    if choice==1:
+        Add()
+    elif choice==2:
+        View()
+    elif choice==3:
+        Remove()
+    elif choice==4:
+        Mark()
+    elif choice==5:
         break
-    else:
-        print("Invalid choice. Please enter a number between 1 and 4.")
+
+print("\n-----Exit Successful-----\n")
